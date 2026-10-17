@@ -1,0 +1,30 @@
+{
+  "name": "posmotri-v-okno-fd",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/elyuzik/posmotri-v-okno-fd#readme",
+  "bugs": {
+    "url": "https://github.com/elyuzik/posmotri-v-okno-fd/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elyuzik/posmotri-v-okno-fd.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo Привет Мир!",
+    "check": "prettier --check './**/*.{html,css,js}'",
+    "format": "prettier --write './**/*.{html,css,js}'",
+    "lint": "stylelint '**/*.css'",
+    "lintfix": "stylelint '**/*.css' --fix",
+    "checkAll": "npm run check && npm run lint",
+    "fixAll": "npm run format && npm run lintfix"
+  },
+  "dependencies": {
+    "prettier": "^3.9.10",
+    "stylelint": "^17.16.0"
+  }
+}
