@@ -32,6 +32,8 @@ ol {
   list-style: none;
 }
 
+/* Утилита для скрытия элементов (доступность) */
+
 .visually-hidden {
   position: absolute;
   inline-size: 1px;
@@ -41,6 +43,8 @@ ol {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* 2. ОБЩИЙ КАРКАС СТРАНИЦЫ */
 
 .page {
   display: flex;
@@ -63,6 +67,29 @@ ol {
   width: 1140px;
 }
 
+/* 3. ЛЕВАЯ КОЛОНКА: ВИДЕО И ФОРМА  */
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 711px;
+}
+
+.result__video-container {
+  width: 711px;
+  height: 386px;
+  position: relative;
+}
+
+.result__video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* --- Форма поиска --- */
+
 .search-form {
   display: flex;
   flex-direction: row;
@@ -71,27 +98,115 @@ ol {
   gap: 40px;
 }
 
+.search-form__fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
 .search-form__fieldset-title {
   font-family: inherit;
   font-size: 18px;
   font-weight: 400;
 }
 
-.content__list-container {
+.search-form__label {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
-  height: 298px;
-  overflow-y: auto;
-  position: relative;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
 }
 
-.content__list {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  line-height: 1;
+/* --- Текстовое поле (Город) --- */
+
+.search-form__textfield {
+  appearance: none;
+  border: none;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-radius: 0;
+  padding: 0;
+  color: #fff;
+  background-color: transparent;
+  font: inherit;
+  width: 225px;
+  height: 34px;
 }
+
+.search-form__textfield::placeholder {
+  color: rgb(255 255 255 / 0.7);
+}
+
+/* Фокус для текстового поля */
+
+.search-form__textfield:focus {
+  outline: none;
+}
+
+.search-form__label:has(.search-form__textfield:focus-visible) {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
+
+/* --- Чекбоксы (Время суток) --- */
+
+.search-form__checkbox-list {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.search-form__checkbox-list .search-form__label {
+  cursor: pointer;
+}
+
+.search-form__pseudo-checkbox {
+  height: 19px;
+  width: 19px;
+  border: 1px solid #fff;
+  padding: 1px;
+  display: flex;
+}
+
+.search-form__pseudo-checkbox::after {
+  content: '';
+  display: block;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
+  opacity: 1;
+}
+
+/* Подчеркивание при наведении на весь лейбл чекбокса */
+
+.search-form__label:hover .search-form__label-text {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Фокус для чекбоксов */
+
+.search-form__checkbox-list .search-form__label:has(:focus-visible) {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Кнопка "Найти" */
+
+.search-form__submit-button {
+  min-width: 194px;
+  height: 34px;
+  align-self: flex-end;
+}
+
+/* 4. ПРАВАЯ КОЛОНКА: ЗАГОЛОВОК И КАРТОЧКИ  */
 
 .content__details {
   display: flex;
@@ -113,26 +228,25 @@ ol {
   color: #545050;
 }
 
-.result {
+/* --- Контейнер со списком --- */
+
+.content__list-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 711px;
-}
-
-.result__video-container {
-  width: 711px;
-  height: 386px;
+  gap: 30px;
+  height: 298px;
+  overflow-y: auto;
   position: relative;
 }
 
-.result__video {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+.content__list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  line-height: 1;
 }
 
-/* ТЕМПЛЕЙТЫ */
+/* --- Карточка видео --- */
 
 .content__list-item {
   display: flex;
@@ -157,15 +271,21 @@ ol {
   outline-offset: 2px;
 }
 
-.content__list-item:active {
-  background-color: #545050;
-}
-
 .content__card-link:hover .content__video-card-title,
 .content__card-link:hover .content__video-card-description {
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-thickness: 1px;
+}
+
+.content__list-item:active {
+  background-color: #545050;
+}
+
+/* Класс для активной карточки (добавляется через JS) */
+
+.content__card-link_current {
+  background-color: #545050;
 }
 
 .content__video-card {
@@ -195,6 +315,7 @@ ol {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
 }
 
 .content__video-card-thumbnail {
@@ -205,99 +326,9 @@ ol {
   object-position: right;
 }
 
-/* Чек-боксы: утро, ночь, день. */
+/* 5. ОБЩИЕ КОМПОНЕНТЫ */
 
-.search-form__checkbox-list {
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-}
-
-.search-form__fieldset {
-  border: none;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  min-width: 0;
-}
-
-.search-form__label {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  width: fit-content;
-}
-
-.search-form__checkbox-list .search-form__label {
-  cursor: pointer;
-}
-
-/* Стилизация текстового поля ввода */
-
-.search-form__textfield {
-  appearance: none;
-  border: none;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  border-radius: 0;
-  padding: 0;
-  color: #fff;
-  background-color: transparent;
-  font: inherit;
-  width: 225px;
-  height: 34px;
-}
-
-.search-form__textfield::placeholder {
-  color: rgb(255 255 255 / 0.7);
-}
-
-/* Факультативно (Focus) */
-
-.search-form__textfield:focus {
-  outline: none;
-}
-
-.search-form__label:has(.search-form__textfield:focus-visible) {
-  outline: 1px solid #fff;
-  outline-offset: 2px;
-}
-
-/* Стилизация чекбокса */
-
-.search-form__pseudo-checkbox {
-  height: 19px;
-  width: 19px;
-  border: 1px solid #fff;
-  padding: 1px;
-  display: flex;
-}
-
-.search-form__pseudo-checkbox::after {
-  content: '';
-  display: block;
-  background-color: #fff;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-}
-
-.search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
-  opacity: 1;
-}
-
-.search-form__label:hover .search-form__label-text {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-
-.search-form__checkbox-list .search-form__label:has(:focus-visible) {
-  outline: 1px solid #fff;
-  outline-offset: 2px;
-}
-
-/* Стилизация кнопки и их состояние */
+/* --- Кнопки (общий класс) --- */
 
 .button {
   display: flex;
@@ -309,17 +340,6 @@ ol {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-}
-
-.search-form__submit-button {
-  min-width: 194px;
-  height: 34px;
-  align-self: flex-end;
-}
-
-.more-button {
-  width: 100%;
-  min-height: 34px;
 }
 
 .button:hover {
@@ -339,7 +359,14 @@ ol {
   outline-offset: 2px;
 }
 
-/* Кастомный скроллбар */
+/* Кнопка "Показать еще" */
+
+.more-button {
+  width: 100%;
+  min-height: 34px;
+}
+
+/* --- Кастомный скроллбар --- */
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
