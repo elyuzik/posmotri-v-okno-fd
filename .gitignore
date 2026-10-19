@@ -1,6 +1,4 @@
 node_modules/
-/.DS_Store
-/.prettiercache
-/.package-lock.json
-/.package.json
-/stylelintcache
+.DS_Store
+.prettier-cache
+.stylelintcache
