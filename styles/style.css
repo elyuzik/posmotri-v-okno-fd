@@ -132,7 +132,7 @@ ol {
   background-color: transparent;
   font: inherit;
   width: 225px;
-  height: 34px;
+  height: 27px;
 }
 
 .search-form__textfield::placeholder {
@@ -220,7 +220,7 @@ ol {
   font-family: Oswald, sans-serif;
   font-weight: bold;
   font-size: 75px;
-  line-height: 94%;
+  line-height: 0.94;
   text-transform: uppercase;
 }
 
@@ -262,6 +262,10 @@ ol {
   cursor: pointer;
 }
 
+.content__card-link:active {
+  background-color: #545050;
+}
+
 .content__card-link:focus {
   outline: none;
 }
@@ -276,10 +280,6 @@ ol {
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-thickness: 1px;
-}
-
-.content__list-item:active {
-  background-color: #545050;
 }
 
 /* Класс для активной карточки (добавляется через JS) */
@@ -323,7 +323,7 @@ ol {
   width: 196px;
   flex: 0 0 196px;
   object-fit: cover;
-  object-position: right;
+  object-position: center;
 }
 
 /* 5. ОБЩИЕ КОМПОНЕНТЫ */
@@ -363,7 +363,8 @@ ol {
 
 .more-button {
   width: 100%;
-  min-height: 34px;
+  min-height: 33px;
+  max-width: 389px;
 }
 
 /* --- Кастомный скроллбар --- */
